@@ -18,7 +18,7 @@ function add_poll () {
             <form method="POST" action="#">
                 <label for="poll-name">Poll Name</label>
                 <input name="poll-name" id="poll-name" type="text" placeholder="Enter a name for your new poll" />
-                <hr />
+
                 <ul>
                     <li>
                         <label for="poll-option1">Option 1</label>
