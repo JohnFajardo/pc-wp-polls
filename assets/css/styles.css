@@ -1,0 +1,17 @@
+.container {
+  width: 600px;
+  margin: 0 auto;
+}
+
+.logo {
+  width: 300px;
+}
+
+.tagline {
+  display: block;
+  font-size: 10px;
+}
+
+input {
+  width: 100%;
+}

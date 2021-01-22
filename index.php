@@ -59,6 +59,13 @@ function plugin_install () {
 // However, these have just been definitions so far. Let's actually really really call them this time:
 register_activation_hook( __FILE__, 'plugin_install' );
 
+function addCustomStyles() {
+    wp_register_style( 'custom_wp_admin_css', plugin_dir_url( __FILE__ ) . 'assets/css/styles.css', false, '1.0.0' );
+    wp_enqueue_style( 'custom_wp_admin_css' );
+}
+
+add_action( 'admin_enqueue_scripts', 'addCustomStyles' ); 
+
 // Now let's add a menu item to manage our polls:
 // We add an action telling Wordpress what to add and the name of the function
 add_action("admin_menu", "add_menu");
