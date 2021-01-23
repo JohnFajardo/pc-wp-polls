@@ -2,14 +2,14 @@
 
 function createPoll() {
 
-    define(PLUG_NAME, "polls");
+    define('PLUG_NAME', "polls");
     $backLink = "<a href=\"admin.php?page=".PLUG_NAME."\">Create another!</a>";
     global $wpdb;
 
     $wpdb->insert(
         $wpdb->prefix . "polls_" ."polls",
         array(
-            'name' => $_POST["poll-name"],
+            'name' => stripslashes($_POST["poll-name"]),
             'creationDate' => date('Y-m-d H:i:s')
         )
     );
@@ -23,8 +23,8 @@ function createPoll() {
             $wpdb->insert(
                 $wpdb->prefix . "polls_" . "options",
                 array(
-                    'pollid' => $pollId,
-                    'name' => $fieldValue
+                    'poll_id' => $pollId,
+                    'name' => stripslashes($fieldValue)
                 )
             );
         }
@@ -35,7 +35,6 @@ function createPoll() {
             <h1>A new poll called {$_POST["poll-name"]} was created with the following options:</h1>
         </div>
     EOD;
-    ;
 
     echo "<ul>";
         foreach($_POST as $fieldName => $fieldValue){

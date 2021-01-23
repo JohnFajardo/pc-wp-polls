@@ -4,7 +4,7 @@ wp_enqueue_style('partnerCommStyles', plugin_dir_path(__FILE__) . 'assets/css/st
 
 function add_poll () {
     if($_POST){
-        include(plugin_dir_path(__FILE__) . '/test.php');
+        include(plugin_dir_path(__FILE__) . '/create-poll.php');
     } else {
 ?>
 

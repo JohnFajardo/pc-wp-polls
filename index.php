@@ -10,6 +10,7 @@ Version: 1.0
 
 function plugin_install () {
     global $wpdb;
+    $charset_collate = $wpdb->get_charset_collate();
 
     // First we define our tables. We need 3, so let's create the names
     $pollsTable = $wpdb->prefix . "polls_" ."polls";
@@ -29,22 +30,22 @@ function plugin_install () {
     // Then we need to create options that are tied to each poll
     $createOptionsTable = "CREATE TABLE $optionsTable (
         id mediumint(9) NOT NULL AUTO_INCREMENT,
-        pollId mediumInt(9) NOT NULL,
+        poll_id mediumInt(9) NOT NULL,
         name tinytext NOT NULL,
         PRIMARY KEY  (id),
-        FOREIGN KEY (pollId) REFERENCES {$pollsTable} (id)
+        FOREIGN KEY (poll_id) REFERENCES {$pollsTable} (id)
     ) $charset_collate;";
 
     // And finally, we need to store each vote as a row. Each vote belongs to a poll
     // and represents one option from it
     $createVotesTable = "CREATE TABLE $votesTable (
         id mediumint(9) NOT NULL AUTO_INCREMENT,
-        pollId mediumInt(9) NOT NULL,
-        optionId mediumInt(9) NOT NULL,
+        poll_id mediumInt(9) NOT NULL,
+        option_id mediumInt(9) NOT NULL,
         creationDate TIMESTAMP NOT NULL,
         PRIMARY KEY  (id),
-        FOREIGN KEY (pollId) REFERENCES {$pollsTable} (id),
-        FOREIGN KEY (optionId) REFERENCES {$optionsTable} (id)
+        FOREIGN KEY (poll_id) REFERENCES {$pollsTable} (id),
+        FOREIGN KEY (option_id) REFERENCES {$optionsTable} (id)
     ) $charset_collate;";
 
     // We need to import the upgrade script to make the plugin create the tables upon activation:
@@ -64,7 +65,7 @@ function addCustomStyles() {
     wp_enqueue_style( 'custom_wp_admin_css' );
 }
 
-add_action( 'admin_enqueue_scripts', 'addCustomStyles' ); 
+add_action('admin_enqueue_scripts', 'addCustomStyles'); 
 
 // Now let's add a menu item to manage our polls:
 // We add an action telling Wordpress what to add and the name of the function
@@ -73,7 +74,7 @@ add_action("admin_menu", "add_menu");
 // And this is the function that contains our menu
 // The last argument is the name of the function to execute:
 function add_menu() {
-    add_menu_page("Polls", "Polls", 4, "polls", "managePollsPage");
+    add_menu_page("Polls", "Polls", "administrator", "polls", "managePollsPage");
 }
 
 // And this is the function that gets called. We're just importing a file,
@@ -81,3 +82,6 @@ function add_menu() {
 function managePollsPage() {
     include(plugin_dir_path(__FILE__) . '/add-poll.php');
 }
+
+// And finally, let's include the file where we define our new endpoints:
+include(plugin_dir_path(__FILE__) . '/api-endpoints.php');
