@@ -2,8 +2,10 @@
 
 // GET all polls from /wp-json/partnercomm/polls
 add_action("rest_api_init", "getPolls");
+
 // GET one poll by ID from /wp-json/partnercomm/polls/:id
 add_action("rest_api_init", "getPoll");
+
 // POST cast vote to /wp-json/partnercomm/polls
 add_action("rest_api_init", "castVote");
 

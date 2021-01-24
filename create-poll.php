@@ -17,7 +17,7 @@ function createPoll() {
     $pollId = $wpdb->insert_id;
     
     foreach($_POST as $fieldName => $fieldValue) {
-        if($fieldName === "poll-name") {
+        if($fieldName === "poll-name" || $fieldValue === '') {
             continue;
         } else {
             $wpdb->insert(
