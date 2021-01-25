@@ -55,12 +55,18 @@ function queryPoll($data) {
     ");
 
     $options = $wpdb->get_results("
-        SELECT *
-        FROM {$pollOptions}
-        WHERE poll_id = {$id}
+        SELECT polls.name, options.id, options.name, COUNT(votes.id) as votes
+        FROM wp_polls_options as options
+        LEFT JOIN wp_polls_votes as votes ON options.id = votes.option_id
+        LEFT JOIN wp_polls_polls as polls ON options.poll_id = polls.id
+        WHERE polls.id = $id
+        GROUP BY options.name
+        ORDER BY polls.name
     ");
 
-    return rest_ensure_response([$poll, $options]);
+    $response = ['poll' => $poll, 'options' => $options];
+
+    return rest_ensure_response($response);
 }
 
 // And now let's build the endpoint to cast votes.
@@ -80,6 +86,7 @@ function castVote() {
 function insertVote($data) {
     global $wpdb;
     $table = $wpdb->prefix . "polls_" . "votes";
+    $pollId = $data['poll_id'];
 
     $wpdb->insert(
         $table,
@@ -89,5 +96,7 @@ function insertVote($data) {
         )
     );
 
-    return rest_ensure_response('Vote cast');
+    $newResult = ['id' => $pollId];
+
+   return rest_ensure_response(queryPoll($newResult));
 }
