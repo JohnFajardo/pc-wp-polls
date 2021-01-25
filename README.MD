@@ -6,7 +6,7 @@ Whis is a small plugin developed as a code challenge for a job application. It a
 
 ## How to use:
 
-Download the latest release and install via the plugin manager. After installation, a new "Polls" menu will be available. Click on it to be taken to the poll creation screen.
+[Download the latest release](https://github.com/ThatJohn/pc-wp-polls/releases/tag/v1.0) and install via the plugin manager. After installation, a new "Polls" menu will be available. Click on it to be taken to the poll creation screen.
 
 Three new REST endpoints will now be available:
 
