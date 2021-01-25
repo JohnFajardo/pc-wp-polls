@@ -25,8 +25,6 @@ Sample POST request body:
 
 ## TODO:
 
----
-
 -   Create route to get all polls. ✅
 -   Create route to get single poll. ✅
 -   Create route to case votes. ✅
