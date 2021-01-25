@@ -1,6 +1,6 @@
 # Wordpress poll plugin
 
-Whis is a small plugin developed as a code challenge for a job application. It adds the capability to build polls within the Wordpress admin area and enables REST routes to cast votes.
+This is a small plugin developed as a code challenge for a job application. It adds the capability to build polls within the Wordpress admin area and enables REST routes to cast votes.
 
 ![screenshot](assets/images/backend.png)
 
