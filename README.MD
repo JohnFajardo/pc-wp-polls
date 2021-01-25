@@ -23,10 +23,12 @@ Sample POST request body:
 }
 ```
 
+-   Finally, go to the [frontend repo](https://github.com/ThatJohn/wp-polls-frontend) for a small Vue app to consume these endpoints.
+
 ## TODO:
 
 -   Create route to get all polls. ✅
 -   Create route to get single poll. ✅
 -   Create route to case votes. ✅
--   Create additional routes to allow for poll creation via API requests.
--   Improve admin interface to view more information about polls and options.
+-   Create additional routes to allow for poll creation via API requests. 🚧
+-   Improve admin interface to view more information about polls and options. 🚧
